@@ -3,9 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 import { Target, Zap, Shield, BarChart3, Users2, Sparkles } from "lucide-react";
 
 const Brands = () => {
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     companyName: "",
     contactName: "",
@@ -14,10 +16,30 @@ const Brands = () => {
     message: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Thank you! Our team will contact you shortly.");
-    setFormData({ companyName: "", contactName: "", email: "", phone: "", message: "" });
+    setLoading(true);
+
+    try {
+      const { error } = await supabase
+        .from("brand_submissions")
+        .insert({
+          company_name: formData.companyName,
+          contact_name: formData.contactName,
+          email: formData.email,
+          phone: formData.phone || null,
+          campaign_details: formData.message,
+        });
+
+      if (error) throw error;
+
+      toast.success("Thank you! Our team will contact you shortly.");
+      setFormData({ companyName: "", contactName: "", email: "", phone: "", message: "" });
+    } catch (error: any) {
+      toast.error(error.message || "Failed to submit request");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const advantages = [
@@ -227,8 +249,8 @@ const Brands = () => {
                 placeholder="Tell us about your brand, target audience, and campaign goals..."
               />
             </div>
-            <Button type="submit" size="lg" className="w-full text-lg py-6">
-              Get Started
+            <Button type="submit" size="lg" className="w-full text-lg py-6" disabled={loading}>
+              {loading ? "Submitting..." : "Get Started"}
             </Button>
           </form>
         </div>

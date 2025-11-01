@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Users, Megaphone, TrendingUp, Sparkles } from "lucide-react";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
@@ -171,6 +172,8 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };

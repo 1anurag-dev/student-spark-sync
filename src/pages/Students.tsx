@@ -3,9 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 import { CheckCircle2, DollarSign, Users, TrendingUp, Instagram } from "lucide-react";
 
 const Students = () => {
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -14,10 +16,30 @@ const Students = () => {
     message: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Application submitted! We'll reach out soon.");
-    setFormData({ name: "", email: "", instagram: "", followers: "", message: "" });
+    setLoading(true);
+
+    try {
+      const { error } = await supabase
+        .from("student_submissions")
+        .insert({
+          name: formData.name,
+          email: formData.email,
+          followers: formData.followers,
+          platform: "Instagram",
+          profile_url: formData.instagram,
+        });
+
+      if (error) throw error;
+
+      toast.success("Application submitted! We'll reach out soon.");
+      setFormData({ name: "", email: "", instagram: "", followers: "", message: "" });
+    } catch (error: any) {
+      toast.error(error.message || "Failed to submit application");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const benefits = [
@@ -192,8 +214,8 @@ const Students = () => {
                 placeholder="What type of content do you create? What niches do you cover?"
               />
             </div>
-            <Button type="submit" size="lg" className="w-full text-lg py-6">
-              Join the Network
+            <Button type="submit" size="lg" className="w-full text-lg py-6" disabled={loading}>
+              {loading ? "Submitting..." : "Join the Network"}
             </Button>
           </form>
         </div>
