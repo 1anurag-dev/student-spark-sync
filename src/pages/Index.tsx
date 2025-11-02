@@ -9,39 +9,119 @@ const Index = () => {
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-background py-32 px-6 min-h-screen flex items-center">
         <div className="max-w-7xl mx-auto w-full">
-          <div className="inline-block px-6 py-3 bg-primary/10 rounded-full mb-8 animate-fade-in">
-            <span className="text-primary text-sm font-semibold tracking-wide uppercase">
-              Authentic Creator Marketing Platform
-            </span>
-          </div>
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-black text-foreground mb-8 leading-none animate-fade-in-up">
-            CONNECT
-            <br />
-            <span className="relative inline-block">
-              CREATORS
-              <div className="absolute -right-8 top-1/2 -translate-y-1/2 w-20 h-20 md:w-32 md:h-32 bg-primary rounded-full flex items-center justify-center">
-                <Sparkles className="w-10 h-10 md:w-16 md:h-16 text-background" />
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left Content */}
+            <div>
+              <div className="inline-block px-6 py-3 bg-primary/10 rounded-full mb-8 animate-fade-in">
+                <span className="text-primary text-sm font-semibold tracking-wide uppercase">
+                  Authentic Creator Marketing Platform
+                </span>
               </div>
-            </span>
-            <br />
-            WITH BRANDS
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl animate-fade-in delay-100">
-            Bridging college student creators and brands for authentic, impactful marketing campaigns that resonate with Gen Z.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 animate-scale-in delay-200">
-            <Link to="/students">
-              <Button size="lg" className="text-lg px-10 py-7 rounded-full bg-primary hover:bg-primary/90 text-background font-bold hover:scale-105 transition-transform">
-                LET'S TALK
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
-            <Link to="/brands">
-              <Button size="lg" variant="outline" className="text-lg px-10 py-7 rounded-full border-2 border-foreground/20 text-foreground hover:bg-foreground/5 hover:scale-105 transition-transform font-bold">
-                FOR BRANDS
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
+              <h1 className="text-6xl md:text-8xl font-black text-foreground mb-8 leading-none animate-fade-in-up">
+                CONNECT
+                <br />
+                <span className="relative inline-block">
+                  CREATORS
+                  <div className="absolute -right-8 top-1/2 -translate-y-1/2 w-20 h-20 md:w-24 md:h-24 bg-primary rounded-full flex items-center justify-center">
+                    <Sparkles className="w-10 h-10 md:w-12 md:h-12 text-background" />
+                  </div>
+                </span>
+                <br />
+                WITH BRANDS
+              </h1>
+              <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl animate-fade-in delay-100">
+                Bridging college student creators and brands for authentic, impactful marketing campaigns that resonate with Gen Z.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-6 animate-scale-in delay-200">
+                <Link to="/students">
+                  <Button size="lg" className="text-lg px-10 py-7 rounded-full bg-primary hover:bg-primary/90 text-background font-bold hover:scale-105 transition-transform">
+                    LET'S TALK
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                </Link>
+                <Link to="/brands">
+                  <Button size="lg" variant="outline" className="text-lg px-10 py-7 rounded-full border-2 border-foreground/20 text-foreground hover:bg-foreground/5 hover:scale-105 transition-transform font-bold">
+                    FOR BRANDS
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Phone Mockup */}
+            <div className="relative flex justify-center items-center animate-fade-in delay-300">
+              {/* Money Elements Floating Around */}
+              <div className="absolute -top-8 -left-8 text-4xl animate-bounce">💸</div>
+              <div className="absolute top-16 -right-4 text-3xl animate-pulse delay-100">💰</div>
+              <div className="absolute -bottom-4 left-8 text-3xl animate-bounce delay-200">🤑</div>
+              <div className="absolute bottom-20 -right-8 text-2xl animate-pulse">💵</div>
+              
+              {/* Phone Frame */}
+              <div className="relative w-[320px] h-[650px] bg-foreground rounded-[3rem] p-3 shadow-2xl">
+                {/* Screen */}
+                <div className="w-full h-full bg-background rounded-[2.5rem] overflow-hidden">
+                  {/* Instagram Status Bar */}
+                  <div className="bg-background px-6 py-3 flex justify-between items-center border-b border-border/50">
+                    <span className="text-xs text-muted-foreground">9:41</span>
+                    <div className="flex gap-1">
+                      <div className="w-1 h-1 rounded-full bg-muted-foreground"></div>
+                      <div className="w-1 h-1 rounded-full bg-muted-foreground"></div>
+                      <div className="w-1 h-1 rounded-full bg-muted-foreground"></div>
+                    </div>
+                  </div>
+
+                  {/* Instagram Profile Header */}
+                  <div className="px-4 py-6">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center">
+                        <Users className="w-10 h-10 text-background" />
+                      </div>
+                      <div className="flex gap-8">
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-foreground">127</div>
+                          <div className="text-xs text-muted-foreground">Posts</div>
+                        </div>
+                        <div className="text-center relative">
+                          <div className="text-2xl font-bold text-primary">1.2K</div>
+                          <div className="text-xs text-muted-foreground">Followers</div>
+                          {/* Highlight Effect */}
+                          <div className="absolute -inset-2 bg-primary/20 rounded-lg -z-10 animate-pulse"></div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-foreground">892</div>
+                          <div className="text-xs text-muted-foreground">Following</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Profile Info */}
+                    <div className="mb-4">
+                      <h3 className="font-bold text-foreground mb-1">@college_creator</h3>
+                      <p className="text-sm text-muted-foreground">Student Creator 📚✨</p>
+                      <p className="text-sm text-muted-foreground">Making content & earning 💰</p>
+                    </div>
+
+                    {/* Earning Indicator */}
+                    <div className="bg-primary/10 border border-primary/30 rounded-2xl p-4 mt-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-sm font-semibold text-foreground">Monthly Earnings</span>
+                        <TrendingUp className="w-4 h-4 text-primary" />
+                      </div>
+                      <div className="text-3xl font-black text-primary mb-1">$2,450</div>
+                      <div className="text-xs text-muted-foreground">+32% from last month</div>
+                    </div>
+
+                    {/* Action Button */}
+                    <button className="w-full bg-primary text-background font-bold py-3 rounded-xl mt-4 hover:bg-primary/90 transition-colors">
+                      Start Earning
+                    </button>
+                  </div>
+                </div>
+
+                {/* Phone Notch */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-foreground rounded-b-2xl"></div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
