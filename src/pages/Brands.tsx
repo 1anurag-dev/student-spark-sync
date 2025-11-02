@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Target, Zap, Shield, BarChart3, Users2, Sparkles } from "lucide-react";
+import Footer from "@/components/Footer";
 
 const Brands = () => {
   const [loading, setLoading] = useState(false);
@@ -45,52 +46,54 @@ const Brands = () => {
   const advantages = [
     {
       icon: Target,
-      title: "Reach Gen Z Where They Are",
-      description: "Connect with college students through authentic voices they actually trust and follow"
+      title: "Reach Gen Z",
+      description: "Connect with college students through authentic voices they trust"
     },
     {
       icon: Users2,
-      title: "Collective Influence Power",
-      description: "Access groups of nano-influencers for massive reach with genuine engagement"
+      title: "Collective Power",
+      description: "Access groups of nano-influencers for massive reach"
     },
     {
       icon: Sparkles,
       title: "Authentic Content",
-      description: "Get real, relatable content that resonates with young audiences, not polished ads"
+      description: "Get real, relatable content that resonates with audiences"
     },
     {
       icon: BarChart3,
-      title: "Data-Driven Results",
-      description: "Track campaign performance and ROI with detailed analytics and reporting"
+      title: "Data-Driven",
+      description: "Track campaign performance with detailed analytics"
     },
     {
       icon: Shield,
       title: "Vetted Creators",
-      description: "Work with pre-screened student creators who align with your brand values"
+      description: "Work with pre-screened creators who align with your brand"
     },
     {
       icon: Zap,
-      title: "Fast Campaign Launch",
-      description: "Launch campaigns quickly with our streamlined matching and onboarding process"
+      title: "Fast Launch",
+      description: "Launch campaigns quickly with streamlined onboarding"
     }
   ];
 
   return (
-    <div className="min-h-screen bg-secondary">
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-20 px-6 bg-primary">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-accent opacity-95"></div>
-        <div className="relative max-w-6xl mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-bold text-primary-foreground mb-6 animate-fade-in-up">
-            Authentic Marketing That Actually Works
+      <section className="relative overflow-hidden py-32 px-6 min-h-[80vh] flex items-center">
+        <div className="max-w-7xl mx-auto w-full">
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-black text-foreground mb-8 leading-none animate-fade-in-up">
+            AUTHENTIC
+            <br />
+            MARKETING
+            <br />
+            THAT WORKS
           </h1>
-          <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto animate-fade-in delay-100">
+          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl animate-fade-in delay-100">
             Connect with college students through verified nano-influencers who create genuine content your target audience trusts.
           </p>
           <Button 
             size="lg" 
-            variant="secondary"
-            className="animate-scale-in delay-200 text-lg px-8 py-6 hover:scale-105 transition-transform"
+            className="bg-primary hover:bg-primary/90 text-background font-bold text-lg px-10 py-7 rounded-full animate-scale-in delay-200 hover:scale-105 transition-transform"
             onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Start Your Campaign
@@ -99,20 +102,22 @@ const Brands = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-secondary-foreground animate-fade-in">
-            Why Brands Partner With Us
+      <section className="py-32 px-6 border-t border-border">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-5xl md:text-7xl font-black text-center mb-20 text-foreground animate-fade-in">
+            WHY PARTNER WITH US
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {advantages.map((advantage, index) => (
               <div 
                 key={index}
-                className="bg-background p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 animate-fade-in"
+                className="bg-card border border-border p-10 rounded-3xl hover:border-primary/50 transition-all animate-fade-in"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <advantage.icon className="w-12 h-12 text-primary mb-4" />
-                <h3 className="text-2xl font-semibold mb-3 text-foreground">{advantage.title}</h3>
+                <div className="w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center mb-6">
+                  <advantage.icon className="w-8 h-8 text-primary" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4 text-foreground">{advantage.title}</h3>
                 <p className="text-muted-foreground text-lg">{advantage.description}</p>
               </div>
             ))}
@@ -121,51 +126,50 @@ const Brands = () => {
       </section>
 
       {/* The Nano-Influencer Advantage */}
-      <section className="py-20 px-6 bg-primary">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+      <section className="py-32 px-6 border-t border-border">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className="animate-fade-in">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-primary-foreground">
-                The Power of Nano-Influencers
+              <h2 className="text-5xl md:text-7xl font-black mb-8 text-foreground">
+                THE POWER OF
+                <br />
+                NANO-INFLUENCERS
               </h2>
-              <p className="text-xl text-primary-foreground/90 mb-6">
+              <p className="text-xl text-muted-foreground mb-6 leading-relaxed">
                 Traditional influencer marketing is expensive and often feels inauthentic. We've solved this by grouping nano-influencers (1k-10k followers) who have genuine connections with their audiences.
               </p>
-              <p className="text-xl text-primary-foreground/90 mb-6">
-                When combined, these creators deliver:
-              </p>
-              <ul className="space-y-4 text-lg text-primary-foreground/90">
+              <ul className="space-y-4 text-lg text-muted-foreground">
                 <li className="flex items-start">
-                  <span className="text-accent mr-3 text-2xl">•</span>
+                  <span className="text-primary mr-4 text-2xl font-bold">•</span>
                   <span>Higher engagement rates than mega-influencers</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-accent mr-3 text-2xl">•</span>
+                  <span className="text-primary mr-4 text-2xl font-bold">•</span>
                   <span>More authentic, relatable content</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-accent mr-3 text-2xl">•</span>
+                  <span className="text-primary mr-4 text-2xl font-bold">•</span>
                   <span>Better ROI for your marketing budget</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-accent mr-3 text-2xl">•</span>
+                  <span className="text-primary mr-4 text-2xl font-bold">•</span>
                   <span>Direct access to college-age demographics</span>
                 </li>
               </ul>
             </div>
-            <div className="bg-primary-foreground/10 backdrop-blur-sm p-8 rounded-2xl animate-fade-in delay-200">
-              <div className="space-y-6">
-                <div className="border-l-4 border-accent pl-6">
-                  <div className="text-5xl font-bold text-primary-foreground mb-2">5-10x</div>
-                  <p className="text-primary-foreground/80 text-lg">Higher engagement vs traditional influencers</p>
+            <div className="bg-card border-2 border-border p-12 rounded-3xl animate-fade-in delay-200">
+              <div className="space-y-10">
+                <div className="border-l-4 border-primary pl-8">
+                  <div className="text-6xl font-black text-foreground mb-3">5-10x</div>
+                  <p className="text-muted-foreground text-lg">Higher engagement vs traditional influencers</p>
                 </div>
-                <div className="border-l-4 border-accent pl-6">
-                  <div className="text-5xl font-bold text-primary-foreground mb-2">50%</div>
-                  <p className="text-primary-foreground/80 text-lg">Lower cost per engagement</p>
+                <div className="border-l-4 border-primary pl-8">
+                  <div className="text-6xl font-black text-foreground mb-3">50%</div>
+                  <p className="text-muted-foreground text-lg">Lower cost per engagement</p>
                 </div>
-                <div className="border-l-4 border-accent pl-6">
-                  <div className="text-5xl font-bold text-primary-foreground mb-2">100+</div>
-                  <p className="text-primary-foreground/80 text-lg">Vetted student creators ready to partner</p>
+                <div className="border-l-4 border-primary pl-8">
+                  <div className="text-6xl font-black text-foreground mb-3">100+</div>
+                  <p className="text-muted-foreground text-lg">Vetted student creators ready to partner</p>
                 </div>
               </div>
             </div>
@@ -174,17 +178,19 @@ const Brands = () => {
       </section>
 
       {/* Contact Form */}
-      <section id="contact-form" className="py-20 px-6">
+      <section id="contact-form" className="py-32 px-6 border-t border-border">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-6 text-secondary-foreground animate-fade-in">
-            Let's Create Something Authentic
+          <h2 className="text-5xl md:text-7xl font-black text-center mb-8 text-foreground animate-fade-in">
+            LET'S CREATE
+            <br />
+            TOGETHER
           </h2>
           <p className="text-center text-muted-foreground text-lg mb-12 animate-fade-in delay-100">
             Tell us about your brand and campaign goals. We'll connect you with the perfect creator network.
           </p>
-          <form onSubmit={handleSubmit} className="space-y-6 bg-background p-8 rounded-2xl shadow-xl animate-scale-in delay-200">
+          <form onSubmit={handleSubmit} className="space-y-6 bg-card border-2 border-border p-10 rounded-3xl animate-scale-in delay-200">
             <div>
-              <label htmlFor="companyName" className="block text-sm font-medium mb-2 text-foreground">
+              <label htmlFor="companyName" className="block text-sm font-bold mb-3 text-foreground uppercase tracking-wide">
                 Company Name
               </label>
               <Input
@@ -192,12 +198,12 @@ const Brands = () => {
                 value={formData.companyName}
                 onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
                 required
-                className="w-full"
+                className="w-full bg-background border-border rounded-xl py-6"
                 placeholder="Your company"
               />
             </div>
             <div>
-              <label htmlFor="contactName" className="block text-sm font-medium mb-2 text-foreground">
+              <label htmlFor="contactName" className="block text-sm font-bold mb-3 text-foreground uppercase tracking-wide">
                 Contact Name
               </label>
               <Input
@@ -205,12 +211,12 @@ const Brands = () => {
                 value={formData.contactName}
                 onChange={(e) => setFormData({ ...formData, contactName: e.target.value })}
                 required
-                className="w-full"
+                className="w-full bg-background border-border rounded-xl py-6"
                 placeholder="Your name"
               />
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-2 text-foreground">
+              <label htmlFor="email" className="block text-sm font-bold mb-3 text-foreground uppercase tracking-wide">
                 Email
               </label>
               <Input
@@ -219,12 +225,12 @@ const Brands = () => {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 required
-                className="w-full"
+                className="w-full bg-background border-border rounded-xl py-6"
                 placeholder="contact@company.com"
               />
             </div>
             <div>
-              <label htmlFor="phone" className="block text-sm font-medium mb-2 text-foreground">
+              <label htmlFor="phone" className="block text-sm font-bold mb-3 text-foreground uppercase tracking-wide">
                 Phone Number
               </label>
               <Input
@@ -232,12 +238,12 @@ const Brands = () => {
                 type="tel"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full"
+                className="w-full bg-background border-border rounded-xl py-6"
                 placeholder="+1 (555) 000-0000"
               />
             </div>
             <div>
-              <label htmlFor="message" className="block text-sm font-medium mb-2 text-foreground">
+              <label htmlFor="message" className="block text-sm font-bold mb-3 text-foreground uppercase tracking-wide">
                 Campaign Details
               </label>
               <Textarea
@@ -245,16 +251,23 @@ const Brands = () => {
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 rows={4}
-                className="w-full"
-                placeholder="Tell us about your brand, target audience, and campaign goals..."
+                className="w-full bg-background border-border rounded-xl"
+                placeholder="Tell us about your brand and campaign goals..."
               />
             </div>
-            <Button type="submit" size="lg" className="w-full text-lg py-6" disabled={loading}>
+            <Button 
+              type="submit" 
+              size="lg" 
+              className="w-full text-lg py-7 bg-primary hover:bg-primary/90 text-background font-bold rounded-full hover:scale-105 transition-transform" 
+              disabled={loading}
+            >
               {loading ? "Submitting..." : "Get Started"}
             </Button>
           </form>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };

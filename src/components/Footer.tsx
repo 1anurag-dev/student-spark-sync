@@ -1,7 +1,13 @@
 const Footer = () => {
   return (
-    <footer className="bg-primary py-8 px-6 text-center text-primary-foreground/80">
-      <p>© {new Date().getFullYear()} All Rights Reserved. Connect Creators Platform.</p>
+    <footer className="bg-background border-t border-border py-12 px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col items-center justify-center gap-4">
+          <p className="text-muted-foreground text-lg">
+            © {new Date().getFullYear()} All rights reserved.
+          </p>
+        </div>
+      </div>
     </footer>
   );
 };
