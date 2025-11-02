@@ -126,6 +126,51 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Scrolling Image Gallery */}
+      <section className="py-20 overflow-hidden bg-background border-t border-border">
+        <div className="mb-12 text-center">
+          <h2 className="text-4xl md:text-6xl font-black text-foreground mb-4">
+            OUR CREATORS IN ACTION
+          </h2>
+          <p className="text-lg text-muted-foreground">Real students, real content, real results</p>
+        </div>
+        
+        {/* Horizontal Scrolling Container */}
+        <div className="relative">
+          <div className="flex gap-6 animate-scroll-left hover:pause-animation">
+            {[...Array(12)].map((_, i) => (
+              <div 
+                key={i}
+                className="flex-shrink-0 w-[300px] h-[400px] rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/30 flex items-center justify-center group hover:scale-105 transition-transform duration-300"
+              >
+                <div className="text-center p-6">
+                  <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary group-hover:scale-110 transition-all">
+                    <Users className="w-10 h-10 text-primary group-hover:text-background transition-colors" />
+                  </div>
+                  <p className="text-muted-foreground text-sm">Image {i + 1}</p>
+                  <p className="text-xs text-muted-foreground/60 mt-2">Upload your images</p>
+                </div>
+              </div>
+            ))}
+            {/* Duplicate for seamless loop */}
+            {[...Array(12)].map((_, i) => (
+              <div 
+                key={`dup-${i}`}
+                className="flex-shrink-0 w-[300px] h-[400px] rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/30 flex items-center justify-center group hover:scale-105 transition-transform duration-300"
+              >
+                <div className="text-center p-6">
+                  <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary group-hover:scale-110 transition-all">
+                    <Users className="w-10 h-10 text-primary group-hover:text-background transition-colors" />
+                  </div>
+                  <p className="text-muted-foreground text-sm">Image {i + 1}</p>
+                  <p className="text-xs text-muted-foreground/60 mt-2">Upload your images</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* What We Do */}
       <section className="py-32 px-6 bg-background border-t border-border">
         <div className="max-w-7xl mx-auto">
