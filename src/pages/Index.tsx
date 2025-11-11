@@ -33,7 +33,7 @@ const Index = () => {
                 Bridging college student creators and brands for authentic, impactful marketing campaigns that resonate with Gen Z.
               </p>
               <div className="flex flex-col sm:flex-row gap-6 animate-scale-in delay-200">
-                <Link to="/students">
+                <Link to="/creators">
                   <Button size="lg" className="text-lg px-10 py-7 rounded-full bg-primary hover:bg-primary/90 text-background font-bold hover:scale-105 transition-transform">
                     LET'S TALK
                     <ArrowRight className="ml-2 w-5 h-5" />
@@ -257,7 +257,7 @@ const Index = () => {
             Whether you're a student creator looking to monetize your following or a brand seeking authentic Gen Z engagement.
           </p>
           <div className="flex flex-col sm:flex-row gap-8 justify-center animate-scale-in delay-200">
-            <Link to="/students" className="flex-1 max-w-md">
+            <Link to="/creators" className="flex-1 max-w-md">
               <div className="bg-card border-2 border-border p-10 rounded-3xl hover:border-primary transition-all duration-300 cursor-pointer group h-full">
                 <div className="w-20 h-20 bg-primary/20 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:bg-primary group-hover:scale-110 transition-all">
                   <Users className="w-10 h-10 text-primary group-hover:text-background transition-colors" />
