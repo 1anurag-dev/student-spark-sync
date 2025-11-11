@@ -53,6 +53,50 @@ export type Database = {
         }
         Relationships: []
       }
+      brand_profiles: {
+        Row: {
+          company_name: string
+          created_at: string | null
+          description: string | null
+          id: string
+          industry: string | null
+          logo_url: string | null
+          updated_at: string | null
+          user_id: string
+          website: string | null
+        }
+        Insert: {
+          company_name: string
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          industry?: string | null
+          logo_url?: string | null
+          updated_at?: string | null
+          user_id: string
+          website?: string | null
+        }
+        Update: {
+          company_name?: string
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          industry?: string | null
+          logo_url?: string | null
+          updated_at?: string | null
+          user_id?: string
+          website?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "brand_profiles_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       brand_submissions: {
         Row: {
           campaign_details: string
@@ -82,6 +126,113 @@ export type Database = {
           phone?: string | null
         }
         Relationships: []
+      }
+      campaign_applications: {
+        Row: {
+          applied_at: string | null
+          campaign_id: string
+          id: string
+          proposal: string | null
+          proposed_rate: number | null
+          squad_id: string
+          status: Database["public"]["Enums"]["application_status"] | null
+          updated_at: string | null
+        }
+        Insert: {
+          applied_at?: string | null
+          campaign_id: string
+          id?: string
+          proposal?: string | null
+          proposed_rate?: number | null
+          squad_id: string
+          status?: Database["public"]["Enums"]["application_status"] | null
+          updated_at?: string | null
+        }
+        Update: {
+          applied_at?: string | null
+          campaign_id?: string
+          id?: string
+          proposal?: string | null
+          proposed_rate?: number | null
+          squad_id?: string
+          status?: Database["public"]["Enums"]["application_status"] | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "campaign_applications_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "campaign_applications_squad_id_fkey"
+            columns: ["squad_id"]
+            isOneToOne: false
+            referencedRelation: "squads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      campaigns: {
+        Row: {
+          brand_id: string
+          budget: number | null
+          created_at: string | null
+          deliverables: string[] | null
+          description: string
+          end_date: string | null
+          id: string
+          niche: string | null
+          requirements: string | null
+          start_date: string | null
+          status: Database["public"]["Enums"]["campaign_status"] | null
+          target_audience: string | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          brand_id: string
+          budget?: number | null
+          created_at?: string | null
+          deliverables?: string[] | null
+          description: string
+          end_date?: string | null
+          id?: string
+          niche?: string | null
+          requirements?: string | null
+          start_date?: string | null
+          status?: Database["public"]["Enums"]["campaign_status"] | null
+          target_audience?: string | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          brand_id?: string
+          budget?: number | null
+          created_at?: string | null
+          deliverables?: string[] | null
+          description?: string
+          end_date?: string | null
+          id?: string
+          niche?: string | null
+          requirements?: string | null
+          start_date?: string | null
+          status?: Database["public"]["Enums"]["campaign_status"] | null
+          target_audience?: string | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "campaigns_brand_id_fkey"
+            columns: ["brand_id"]
+            isOneToOne: false
+            referencedRelation: "brand_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       communities: {
         Row: {
@@ -196,6 +347,305 @@ export type Database = {
           },
         ]
       }
+      creator_earnings: {
+        Row: {
+          amount: number
+          campaign_id: string
+          created_at: string | null
+          creator_id: string
+          id: string
+          paid_at: string | null
+          squad_id: string
+          status: string | null
+        }
+        Insert: {
+          amount: number
+          campaign_id: string
+          created_at?: string | null
+          creator_id: string
+          id?: string
+          paid_at?: string | null
+          squad_id: string
+          status?: string | null
+        }
+        Update: {
+          amount?: number
+          campaign_id?: string
+          created_at?: string | null
+          creator_id?: string
+          id?: string
+          paid_at?: string | null
+          squad_id?: string
+          status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "creator_earnings_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "creator_earnings_creator_id_fkey"
+            columns: ["creator_id"]
+            isOneToOne: false
+            referencedRelation: "creator_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "creator_earnings_squad_id_fkey"
+            columns: ["squad_id"]
+            isOneToOne: false
+            referencedRelation: "squads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      creator_profiles: {
+        Row: {
+          bio: string | null
+          created_at: string | null
+          id: string
+          instagram_followers: number | null
+          instagram_handle: string | null
+          niche: string | null
+          portfolio_urls: string[] | null
+          tiktok_followers: number | null
+          tiktok_handle: string | null
+          total_earnings: number | null
+          twitter_followers: number | null
+          twitter_handle: string | null
+          updated_at: string | null
+          user_id: string
+          youtube_handle: string | null
+          youtube_subscribers: number | null
+        }
+        Insert: {
+          bio?: string | null
+          created_at?: string | null
+          id?: string
+          instagram_followers?: number | null
+          instagram_handle?: string | null
+          niche?: string | null
+          portfolio_urls?: string[] | null
+          tiktok_followers?: number | null
+          tiktok_handle?: string | null
+          total_earnings?: number | null
+          twitter_followers?: number | null
+          twitter_handle?: string | null
+          updated_at?: string | null
+          user_id: string
+          youtube_handle?: string | null
+          youtube_subscribers?: number | null
+        }
+        Update: {
+          bio?: string | null
+          created_at?: string | null
+          id?: string
+          instagram_followers?: number | null
+          instagram_handle?: string | null
+          niche?: string | null
+          portfolio_urls?: string[] | null
+          tiktok_followers?: number | null
+          tiktok_handle?: string | null
+          total_earnings?: number | null
+          twitter_followers?: number | null
+          twitter_handle?: string | null
+          updated_at?: string | null
+          user_id?: string
+          youtube_handle?: string | null
+          youtube_subscribers?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "creator_profiles_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      messages: {
+        Row: {
+          content: string
+          created_at: string | null
+          id: string
+          is_read: boolean | null
+          recipient_id: string
+          sender_id: string
+          squad_id: string | null
+        }
+        Insert: {
+          content: string
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          recipient_id: string
+          sender_id: string
+          squad_id?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          recipient_id?: string
+          sender_id?: string
+          squad_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_squad_id_fkey"
+            columns: ["squad_id"]
+            isOneToOne: false
+            referencedRelation: "squads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notifications: {
+        Row: {
+          created_at: string | null
+          id: string
+          is_read: boolean | null
+          link: string | null
+          message: string
+          title: string
+          type: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          link?: string | null
+          message: string
+          title: string
+          type?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          link?: string | null
+          message?: string
+          title?: string
+          type?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string | null
+          email: string
+          full_name: string
+          id: string
+          updated_at: string | null
+          user_type: Database["public"]["Enums"]["user_type"]
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string | null
+          email: string
+          full_name: string
+          id: string
+          updated_at?: string | null
+          user_type: Database["public"]["Enums"]["user_type"]
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string | null
+          email?: string
+          full_name?: string
+          id?: string
+          updated_at?: string | null
+          user_type?: Database["public"]["Enums"]["user_type"]
+        }
+        Relationships: []
+      }
+      squad_members: {
+        Row: {
+          creator_id: string
+          id: string
+          is_active: boolean | null
+          joined_at: string | null
+          squad_id: string
+        }
+        Insert: {
+          creator_id: string
+          id?: string
+          is_active?: boolean | null
+          joined_at?: string | null
+          squad_id: string
+        }
+        Update: {
+          creator_id?: string
+          id?: string
+          is_active?: boolean | null
+          joined_at?: string | null
+          squad_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "squad_members_creator_id_fkey"
+            columns: ["creator_id"]
+            isOneToOne: false
+            referencedRelation: "creator_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "squad_members_squad_id_fkey"
+            columns: ["squad_id"]
+            isOneToOne: false
+            referencedRelation: "squads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      squads: {
+        Row: {
+          created_at: string | null
+          created_by: string | null
+          description: string | null
+          id: string
+          image_url: string | null
+          is_active: boolean | null
+          name: string
+          niche: string | null
+          total_followers: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          name: string
+          niche?: string | null
+          total_followers?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          name?: string
+          niche?: string | null
+          total_followers?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       student_submissions: {
         Row: {
           created_at: string | null
@@ -259,6 +709,14 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "user"
+      application_status: "pending" | "accepted" | "rejected" | "completed"
+      campaign_status:
+        | "draft"
+        | "active"
+        | "in_progress"
+        | "completed"
+        | "cancelled"
+      user_type: "creator" | "brand"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -387,6 +845,15 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "user"],
+      application_status: ["pending", "accepted", "rejected", "completed"],
+      campaign_status: [
+        "draft",
+        "active",
+        "in_progress",
+        "completed",
+        "cancelled",
+      ],
+      user_type: ["creator", "brand"],
     },
   },
 } as const
