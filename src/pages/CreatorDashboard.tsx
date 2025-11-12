@@ -169,7 +169,7 @@ export default function CreatorDashboard() {
               <p className="text-muted-foreground mb-6">
                 Keep your profile and social media stats up to date
               </p>
-              <ProfileSetup onComplete={() => {}} />
+              <ProfileSetup onComplete={checkProfile} />
             </div>
           </TabsContent>
         </Tabs>

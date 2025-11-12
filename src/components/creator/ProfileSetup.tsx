@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -25,6 +25,41 @@ export function ProfileSetup({ onComplete }: { onComplete: () => void }) {
     twitterFollowers: '',
   });
 
+  useEffect(() => {
+    if (user) {
+      loadProfile();
+    }
+  }, [user]);
+
+  const loadProfile = async () => {
+    if (!user) return;
+
+    try {
+      const { data: profile } = await supabase
+        .from('creator_profiles')
+        .select('*')
+        .eq('user_id', user.id)
+        .single();
+
+      if (profile) {
+        setFormData({
+          bio: profile.bio || '',
+          niche: profile.niche || '',
+          instagramHandle: profile.instagram_handle || '',
+          instagramFollowers: profile.instagram_followers?.toString() || '',
+          tiktokHandle: profile.tiktok_handle || '',
+          tiktokFollowers: profile.tiktok_followers?.toString() || '',
+          youtubeHandle: profile.youtube_handle || '',
+          youtubeSubscribers: profile.youtube_subscribers?.toString() || '',
+          twitterHandle: profile.twitter_handle || '',
+          twitterFollowers: profile.twitter_followers?.toString() || '',
+        });
+      }
+    } catch (error) {
+      console.error('Error loading profile:', error);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) return;
@@ -43,6 +78,8 @@ export function ProfileSetup({ onComplete }: { onComplete: () => void }) {
         youtube_subscribers: parseInt(formData.youtubeSubscribers) || null,
         twitter_handle: formData.twitterHandle || null,
         twitter_followers: parseInt(formData.twitterFollowers) || null,
+      }, {
+        onConflict: 'user_id'
       });
 
       if (error) throw error;
