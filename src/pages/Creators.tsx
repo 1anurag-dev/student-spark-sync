@@ -81,13 +81,23 @@ const Students = () => {
           <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl animate-fade-in delay-100">
             You don't need millions of followers to start making money. Join our network of nano-influencers and monetize your authentic voice.
           </p>
-          <Button 
-            size="lg" 
-            className="bg-primary hover:bg-primary/90 text-background font-bold text-lg px-10 py-7 rounded-full animate-scale-in delay-200 hover:scale-105 transition-transform"
-            onClick={() => document.getElementById('join-form')?.scrollIntoView({ behavior: 'smooth' })}
-          >
-            Start Earning Today
-          </Button>
+          <div className="flex gap-4 animate-scale-in delay-200">
+            <Button 
+              size="lg" 
+              className="bg-primary hover:bg-primary/90 text-background font-bold text-lg px-10 py-7 rounded-full hover:scale-105 transition-transform"
+              onClick={() => window.location.href = '/auth'}
+            >
+              Get Started Now
+            </Button>
+            <Button 
+              size="lg" 
+              variant="outline"
+              className="font-bold text-lg px-10 py-7 rounded-full hover:scale-105 transition-transform"
+              onClick={() => document.getElementById('join-form')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Learn More
+            </Button>
+          </div>
         </div>
       </section>
 
