@@ -16,9 +16,11 @@ interface StudentSubmission {
   id: string;
   name: string;
   email: string;
+  phone?: string;
   platform: string;
   profile_url: string;
   followers: string;
+  status: string;
   created_at: string;
 }
 
@@ -61,6 +63,7 @@ const AdminDashboard = () => {
   const [isCreatingCommunity, setIsCreatingCommunity] = useState(false);
   const [isCreatingBlog, setIsCreatingBlog] = useState(false);
   const [showCommunitySuccess, setShowCommunitySuccess] = useState(false);
+  const [approvingId, setApprovingId] = useState<string | null>(null);
 
   useEffect(() => {
     checkAuth();
@@ -125,10 +128,39 @@ const AdminDashboard = () => {
   const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate("/admin/login");
-    toast({
-      title: "Logged out",
-      description: "You have been logged out successfully",
-    });
+  };
+
+  const handleApproveCreator = async (application: StudentSubmission) => {
+    setApprovingId(application.id);
+    
+    try {
+      const { error } = await supabase.functions.invoke('send-creator-approval', {
+        body: {
+          applicationId: application.id,
+          email: application.email,
+          name: application.name,
+        }
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Creator Approved!",
+        description: `Approval email sent to ${application.email}`,
+      });
+
+      // Refresh submissions
+      fetchSubmissions();
+    } catch (error: any) {
+      console.error('Approval error:', error);
+      toast({
+        title: "Error",
+        description: error.message || "Failed to approve creator",
+        variant: "destructive",
+      });
+    } finally {
+      setApprovingId(null);
+    }
   };
 
   const handleCreateCommunity = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -337,25 +369,41 @@ const AdminDashboard = () => {
                     <TableRow>
                       <TableHead>Name</TableHead>
                       <TableHead>Email</TableHead>
-                      <TableHead>Platform</TableHead>
+                      <TableHead>Phone</TableHead>
                       <TableHead>Followers</TableHead>
                       <TableHead>Profile</TableHead>
+                      <TableHead>Status</TableHead>
                       <TableHead>Date</TableHead>
+                      <TableHead>Action</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {studentSubmissions.map((student) => (
-                      <TableRow key={student.id}>
-                        <TableCell className="font-medium">{student.name}</TableCell>
-                        <TableCell>{student.email}</TableCell>
-                        <TableCell>{student.platform}</TableCell>
-                        <TableCell>{student.followers}</TableCell>
+                    {studentSubmissions.map((submission) => (
+                      <TableRow key={submission.id}>
+                        <TableCell className="font-medium">{submission.name}</TableCell>
+                        <TableCell>{submission.email}</TableCell>
+                        <TableCell>{submission.phone || 'N/A'}</TableCell>
+                        <TableCell>{submission.followers}</TableCell>
                         <TableCell>
-                          <a href={student.profile_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                            View
+                          <a href={submission.profile_url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                            View IG
                           </a>
                         </TableCell>
-                        <TableCell>{new Date(student.created_at).toLocaleDateString()}</TableCell>
+                        <TableCell>
+                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                            submission.status === 'approved' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+                          }`}>
+                            {submission.status}
+                          </span>
+                        </TableCell>
+                        <TableCell>{new Date(submission.created_at).toLocaleDateString()}</TableCell>
+                        <TableCell>
+                          {submission.status === 'pending' && (
+                            <Button size="sm" onClick={() => handleApproveCreator(submission)} disabled={approvingId === submission.id}>
+                              {approvingId === submission.id ? 'Approving...' : 'Approve'}
+                            </Button>
+                          )}
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
