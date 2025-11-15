@@ -648,31 +648,40 @@ export type Database = {
       }
       student_submissions: {
         Row: {
+          approved_at: string | null
           created_at: string | null
           email: string
           followers: string
           id: string
           name: string
+          phone: string | null
           platform: string
           profile_url: string
+          status: string | null
         }
         Insert: {
+          approved_at?: string | null
           created_at?: string | null
           email: string
           followers: string
           id?: string
           name: string
+          phone?: string | null
           platform: string
           profile_url: string
+          status?: string | null
         }
         Update: {
+          approved_at?: string | null
           created_at?: string | null
           email?: string
           followers?: string
           id?: string
           name?: string
+          phone?: string | null
           platform?: string
           profile_url?: string
+          status?: string | null
         }
         Relationships: []
       }
